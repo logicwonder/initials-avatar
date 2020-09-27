@@ -161,7 +161,7 @@ func getInitials(name string) string {
 	}
 	o := opts{
 		allowEmail: true,
-		limit:      3,
+		limit:      2,
 	}
 	i, _ := parseInitials(strings.NewReader(name), o)
 	return i
