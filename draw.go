@@ -69,7 +69,7 @@ func (g *drawer) Draw(s string, size int, bg *color.RGBA) image.Image {
 	var gbuf truetype.GlyphBuf
 	var err error
 	fsize := fixed.Int26_6(g.fontSize * g.dpi * (64.0 / 72.0))
-	err = gbuf.Load(g.font, fsize, fi, font.HintingFull)
+	err = gbuf.Load(g.font, fsize, fi, font.HintingNone)
 	if err != nil {
 		// fixme
 		drawer.DrawString("")
