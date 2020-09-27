@@ -8,9 +8,9 @@ import (
 	"strconv"
 
 	"github.com/codegangsta/cli"
-	"github.com/holys/initials-avatar"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
+	avatar "github.com/logicwonder/initials-avatar"
 )
 
 type avatarHandler struct {
