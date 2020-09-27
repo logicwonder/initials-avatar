@@ -38,8 +38,9 @@ var (
 
 // InitialsAvatar represents an initials avatar.
 type InitialsAvatar struct {
-	drawer *drawer
-	cache  *lru.Cache
+	drawer   *drawer
+	cache    *lru.Cache
+	language string
 }
 
 // New creates an instance of InitialsAvatar
@@ -65,6 +66,9 @@ type Config struct {
 
 	// TrueType Font size
 	FontSize float64
+
+	//Language
+	Language string
 }
 
 // NewWithConfig provides config for LRU Cache.
@@ -80,6 +84,8 @@ func NewWithConfig(cfg Config) *InitialsAvatar {
 		MaxItems: cfg.MaxItems,
 		MaxBytes: cfg.MaxBytes,
 	})
+
+	avatar.language = cfg.Language
 
 	return avatar
 }
@@ -99,7 +105,14 @@ func (a *InitialsAvatar) DrawToBytes(name string, size int, encoding ...string) 
 	if !isHan(firstRune) && !unicode.IsLetter(firstRune) {
 		return nil, ErrUnsupportChar
 	}
-	initials := getInitials(name)
+
+	var initials string
+	if a.language == "Latin" {
+		initials = getInitials(name)
+	} else {
+		initials = string(name[0:3])
+	}
+
 	bgcolor := getColorByName(name)
 
 	// get from cache
