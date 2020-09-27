@@ -82,6 +82,10 @@ func (g *drawer) Draw(s string, size int, bg *color.RGBA) image.Image {
 	y := int(gbuf.Bounds.Max.Y>>6) + dY
 	x := 0 - int(gbuf.Bounds.Min.X>>6) + dX
 
+	if len(s) == 2 {
+		x = x - 15
+	}
+
 	drawer.Dot = fixed.Point26_6{
 		X: fixed.I(x),
 		Y: fixed.I(y),
